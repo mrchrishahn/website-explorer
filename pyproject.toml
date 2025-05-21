@@ -1,0 +1,13 @@
+[project]
+name = "website-explorer"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiofiles>=23.2.1",
+    "aiohttp>=3.9.3",
+    "beautifulsoup4>=4.12.2",
+    "playwright>=1.42.0",
+    "requests>=2.31.0",
+]
