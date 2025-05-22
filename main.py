@@ -1,5 +1,4 @@
 import csv
-import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 import xml.etree.ElementTree as ET
@@ -8,15 +7,12 @@ import time
 import logging
 import os
 from playwright.async_api import async_playwright
-import hashlib
 import json
 import asyncio
 import aiohttp
 import aiofiles
 from datetime import datetime, timedelta
 from typing import Dict, Set, List, Optional
-import random
-import threading
 from gui import CrawlerGUI, GUILogHandler
 
 # Set up logging
