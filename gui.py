@@ -15,6 +15,10 @@ class CrawlerGUI:
         # Create message queue for thread-safe communication
         self.message_queue = queue.Queue()
         
+        # Log management
+        self.max_log_lines = 1000  # Maximum number of log lines to keep
+        self.current_log_lines = 0
+        
         # Create main frame
         self.main_frame = ttk.Frame(self.root, padding="10")
         self.main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -156,7 +160,19 @@ class CrawlerGUI:
     
     def add_log(self, message: str):
         timestamp = datetime.now().strftime("%H:%M:%S")
-        self.log_text.insert(tk.END, f"[{timestamp}] {message}\n")
+        log_entry = f"[{timestamp}] {message}\n"
+        
+        # Add new log entry
+        self.log_text.insert(tk.END, log_entry)
+        self.current_log_lines += 1
+        
+        # Remove old entries if we exceed the maximum
+        if self.current_log_lines > self.max_log_lines:
+            # Delete oldest lines (first 100 lines or 10% of max, whichever is smaller)
+            lines_to_delete = min(100, self.max_log_lines // 10)
+            self.log_text.delete("1.0", f"{lines_to_delete + 1}.0")
+            self.current_log_lines -= lines_to_delete
+        
         self.log_text.see(tk.END)
     
     def update_gui(self):

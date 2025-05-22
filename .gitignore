@@ -12,3 +12,6 @@ wheels/
 # Ignore all files in the crawling_results directory
 crawling_results/*
 
+.DS_Store
+
+logs/*
